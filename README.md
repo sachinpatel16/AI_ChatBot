@@ -94,7 +94,7 @@ A virtual environment keeps project dependencies isolated from your system Pytho
 **Windows – PowerShell**
 
 ```powershell
-py -3.11 -m venv venv
+py -3.11 -m venv venv  or  python -3.11 -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
 
@@ -105,14 +105,14 @@ py -3.11 -m venv venv
 **Windows – Command Prompt (cmd)**
 
 ```cmd
-py -3.11 -m venv venv
+py -3.11 -m venv venv  or   python -3.11 -m venv venv
 venv\Scripts\activate.bat
 ```
 
 **macOS / Linux**
 
 ```bash
-python3.11 -m venv venv
+python3.11 -m venv venv  or python3 -m venv venv
 source venv/bin/activate
 ```
 
@@ -169,7 +169,25 @@ alembic upgrade head
 > Alembic reads `DATABASE_URL` directly from your `.env` file.
 > Run this every time there are new migrations (after pulling updates).
 
-### Backend – Step 6 – Create Super Admin (First-time Only)
+### Backend – Step 6 – Start the Development Server
+
+From the `Backend` directory:
+
+```bash
+uvicorn app.main:app --reload
+```
+
+**Optional – bind to all network interfaces:**
+```bash
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+| URL | Description |
+|-----|-------------|
+| `http://localhost:8000/docs` | Swagger UI (interactive API docs) |
+| `http://localhost:8000/redoc` | ReDoc API docs |
+
+### Backend – Step 7 – Create Super Admin (First-time Only)
 
 Run this once after migrations to create the first super-admin user (from the `Backend` directory):
 
@@ -192,24 +210,6 @@ python super_admin.py admin admin@example.com MySecurePass "Admin User"
 The user is created with the `super_admin` role, active status, and a 10-year trial.
 
 > The database and migrations (Step 5) must be completed before running this script.
-
-### Backend – Step 7 – Start the Development Server
-
-From the `Backend` directory:
-
-```bash
-uvicorn app.main:app --reload
-```
-
-**Optional – bind to all network interfaces:**
-```bash
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-| URL | Description |
-|-----|-------------|
-| `http://localhost:8000/docs` | Swagger UI (interactive API docs) |
-| `http://localhost:8000/redoc` | ReDoc API docs |
 
 ### Backend – Environment Variables Reference
 
