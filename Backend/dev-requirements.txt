@@ -34,7 +34,7 @@ durationpy==0.10
 ecdsa==0.19.1
 email_validator==2.2.0
 emoji==2.15.0
-en_core_web_sm==3.8.0
+# en_core_web_sm==3.8.0
 fastapi==0.115.9
 filelock==3.25.0
 filetype==1.2.0
